@@ -1,0 +1,292 @@
+@import "./reset";
+
+/*color variables*/
+$background: #162234;
+$headers: #e09f3e;
+$paragrah: rgb(251, 250, 247);
+$font-header: "Luckiest Guy", cursive;
+$font-text: "Montserrat Alternates", sans-serif;
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin text-shadow {
+  text-shadow: 8px 10px black;
+}
+
+body {
+  // position: relative;
+  background-color: $background;
+}
+
+header {
+  /*header styling*/
+  width: 100%;
+  top: 0;
+  position: fixed;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  background-color: $background;
+  color: $headers;
+  font-family: $font-header;
+  font-weight: bold;
+  align-items: center;
+  padding: 1rem;
+  box-shadow: 0px 0px 5px black;
+
+  .header__logo {
+    justify-self: start;
+    margin-left: 15rem;
+    font-size: clamp(1rem, 1rem + 1vw, 2rem);
+    @include text-shadow();
+  }
+  /*navigation list styling*/
+  .navigation ul {
+    @include flex-center();
+    gap: 20px;
+    color: $paragrah;
+  }
+
+  /*list items*/
+  .nav__list {
+    position: relative;
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-size: 1.3rem;
+  }
+  .nav__list::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: $headers;
+    position: absolute;
+    transform: scaleX(0);
+    transition: all 0.4s ease;
+  }
+  .nav__list:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+/*main styling*/
+.container {
+  margin-top: 5rem;
+  padding: 5rem;
+  background-color: $background;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  /*hero styling*/
+  .main__hero {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-items: center;
+    width: 80%;
+    margin: 0 auto;
+  }
+  .main__hero .hero__info {
+    // background-color: red;
+    .hero__header {
+      font-family: $font-header;
+      font-size: clamp(2rem, 1rem + 2vw, 4rem);
+      color: $headers;
+      width: fit-content;
+      transition: all 0.4s ease-out;
+      position: relative;
+      margin-bottom: 10px;
+      background-image: url("../images/blob.svg");
+      background-repeat: no-repeat;
+      @include text-shadow();
+    }
+    .hero__header::after {
+      content: "";
+      display: block;
+      width: 0%;
+      height: 3px;
+      background-color: $headers;
+      position: absolute;
+      z-index: 3;
+      transition: all 0.4s ease;
+    }
+    // .hero__header:hover::after {
+    //   width: 100%;
+    // }
+    .hero__text {
+      max-width: 50%;
+      color: white;
+      font-size: 1.3rem;
+      font-family: $font-text;
+      line-height: 1.7rem;
+    }
+  }
+  .hero__image img {
+    box-shadow: 0 0 10px black;
+    transition: all 0.3s ease-in;
+    width: 100%;
+  }
+  .hero__image img:hover {
+    box-shadow: 0 0 100px black;
+  }
+}
+
+/*about section*/
+.main__about {
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-content: center;
+  padding: 9rem;
+  margin: 10rem auto 0;
+  background-color: $background;
+  border-radius: 20px;
+  box-shadow: 0 0 10px black;
+  .about__image img{
+    transition: all .3s ease-in-out;
+  }
+  &:hover .about__image img{
+    transform: scale(1.1) rotate(10deg);
+  }
+  //about header
+  .about__header {
+    font-size: clamp(2rem, 1rem + 2vw, 3rem);
+    font-family: $font-header;
+    color: $headers;
+    @include text-shadow();
+    margin: 1rem;
+  }
+
+  //about paragraph
+  .about__text {
+    color: white;
+    font-family: $font-text;
+    font-size: 1.5rem;
+  }
+}
+
+/*menu section*/
+
+.main__menu {
+  margin: 5rem auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2em;
+  align-items: center;
+  justify-content: center;
+  .menu__intro {
+    grid-column: span 3;
+    margin: 3rem auto;
+    text-align: center;
+    .menu__header {
+      font-size: 5rem;
+      font-family: $font-header;
+      color: $headers;
+      @include text-shadow();
+    }
+    .menu__text {
+      color: white;
+      font-size: 2rem;
+      font-family: $font-text;
+    }
+  }
+  .menu__items {
+    background-color: antiquewhite;
+    padding: 4rem;
+    text-align: center;
+    border-radius: 20px;
+    img {
+      transition: all 0.4s;
+    }
+    &:hover img {
+      transition: all 0.2s;
+      transform: scale(1.2) translateY(-20px);
+    }
+    .items__name {
+      margin: 1rem;
+      font-family: $font-header;
+      font-size: 2rem;
+      text-shadow: 3px 5px $headers;
+      transition: all 0.2s;
+    }
+    .items__price {
+      font-size: 1.5rem;
+      font-family: $font-text;
+      transition: all 0.2s ease-in-out;
+      width: fit-content;
+      margin: 0 auto;
+    }
+    &:hover .items__price {
+      background-color: $headers;
+    }
+    &:hover .items__name {
+      transform: rotate(10deg);
+      text-shadow: 8px 3px $headers;
+    }
+  }
+}
+
+/*services section*/
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2em;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  .services__info {
+    grid-column: span 3;
+    text-align: center;
+    .services__header {
+      font-size: 5rem;
+      font-family: $font-header;
+      color: $headers;
+      @include text-shadow();
+    }
+    .services__text {
+      color: white;
+      font-size: 2rem;
+      font-family: $font-text;
+    }
+  }
+  .services__service {
+    max-width: 300px;
+    margin: 2rem 1rem;
+    padding: 2rem;
+    text-align: center;
+    .service__text {
+      color: white;
+      font-size: 2rem;
+      font-family: $font-text;
+    }
+  }
+}
+
+.underline {
+  position: relative;
+}
+.underline::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  mix-blend-mode: difference;
+  transition: 0.3s ease-out;
+  width: 0;
+  height: 100%;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px black;
+}
+
+.hero__info:hover .underline::after {
+  width: 100%;
+}
